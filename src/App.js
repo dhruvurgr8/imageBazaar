@@ -25,9 +25,13 @@ function App() {
   console.log(searchQuery);
   return (
     <>
-      <SearchCompo searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <SearchCompo
+        setPageNumber={setPageNumber}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
       <ImageList data={data} />
-      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber}/>
+      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} />
     </>
   );
 }

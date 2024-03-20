@@ -2,8 +2,8 @@ import React from "react"; // Don't forget to import React when using JSX
 import "./image.css";
 
 const Pagination = ({ pageNumber, setPageNumber }) => {
-  if (pageNumber < 0) {
-    pageNumber = 10;
+  if (pageNumber < 1) {
+    setPageNumber(10);
   }
   return (
     <>
@@ -15,6 +15,7 @@ const Pagination = ({ pageNumber, setPageNumber }) => {
         >
           Previous
         </button>
+        <h3>{pageNumber}</h3>
         <button
           onClick={() => {
             setPageNumber((prev) => prev + 1); // Return prev + 1

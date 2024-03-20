@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./image.css";
-const SearchCompo = ({ searchQuery, setSearchQuery }) => {
+const SearchCompo = ({ setPageNumber, searchQuery, setSearchQuery }) => {
   const [value, setValue] = useState("");
   const handleClick = () => {
+    setPageNumber(1);
     setSearchQuery(value);
   };
   return (
