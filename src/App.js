@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import ImageList from "./components/ImageList";
+import SearchCompo from "./components/SearchCompo";
+import Pagination from "./components/Pagination";
 
 function App() {
+  const [data, setData] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("books");
+  useEffect(() => {
+    (async function () {
+      const response = await axios({
+        url: `https://api.unsplash.com/search/photos?`,
+        method: "GET",
+        params: {
+          page: pageNumber,
+          query: searchQuery,
+          client_id: "vcvJ9rWOI4mI4QJQ_kMAaD6hOccNZ720NSyf8SGqfas",
+        },
+      });
+      setData(response.data);
+    })();
+  }, [pageNumber, searchQuery]);
+  console.log(searchQuery);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SearchCompo searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <ImageList data={data} />
+      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber}/>
+    </>
   );
 }
 
